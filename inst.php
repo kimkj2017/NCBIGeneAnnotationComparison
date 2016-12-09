@@ -1,3 +1,5 @@
+<!--The following code is for instructions only. Should be invoked with index.php, not individually -->
+
 
 <!-- Modal -->
 <div id="instModal" class="modal fade" role="dialog">

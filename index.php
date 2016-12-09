@@ -19,23 +19,24 @@
   <div class='well'>
     <form class='form-group' action='process.pl' method='post'>
       <div class='form' style='padding-bottom: 10px;'>
-      <label for='gid'>Gene ID</label>
+      <label for='gid'>Gene ID</label><!-- This accepts NCBI style GENE id -->
       <input id='gid' name='gid' type='text' class='form-control'>
       </div>
       <div class='form' style='padding-bottom: 10px;'>
-      <label for='gname'>Gene Name</label>
+      <label for='gname'>Gene Name</label><!-- This accepts NCBI style GENE name -->
       <input id='gname' name='gname' type='text' class='form-control'>
       </div>
       <div class='form'>
       <input type='submit' class='btn btn-block btn-primary'>
       </div>
     </form>
+    <!--Popup for general instruction of form submission -->
     <button class='btn btn-block btn-warning' data-toggle='modal' data-target='#instModal'>General Instruction of Form Submission</a>
   </div>
   <div class='well'>
+  <!-- Overview page popup -->
   <button class='btn btn-block btn-success' data-toggle='modal' data-target='#overviewModal'>Overview of Gene Data Stored in the Database</a>
   </div>
-  <!--p>What we need: gene, mRNA, other RNA</p-->
   <footer>
     <p>2016 (C) <a href='mailto:kimk3@miamioh.edu'>Kwangju Kim</a> and <a href='mailto:heidelmr@miamioh.edu'>Martin Heidelman</a>. Supervised by
        <a href='mailto:liangc@miamioh.edu'>Dr. Chun Liang</a> and <a href='mailto:wangk4@miamioh.edu'>Kai Wang</a>. All rights reserved.</p>

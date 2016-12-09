@@ -17,6 +17,33 @@ We have used GFF files of cat and tiger, following NCBI format. You may download
 * Felis catus: `GCF_000181335.2_Felis_catus_8.0_genomic.gff`
 * Panthera tigris: `GCF_000464555.1_PanTig1.0_genomic.gff`
 
+## Files included
+
+The package includes the following files.
+
+* `index.php`: The main page which will be shown.
+* `overview.pl`: Perl CGI code which produces web interfaces that show summary differences between two annotations.
+* `process.pl`: Perl CGI which accepts the query data, communicates with the database, and returns the query result.
+* `css`: Bootstrap CSS stylesheet files are contained.
+* `js`: Bootstrap JavaScript and jQuery library files are contained.
+* `GFFparser.pm`: Perl Class script which parses the given GFF files.
+* `GFFparser.pl`: Perl script which imports `GFFparser.pm` so that the users can work with that file.
+* `dbtest.pl`: Perl script which dumps all the data inside the target database.
+
+## Using Parser
+
+You must have Perl iterpreter installed in your machine. Follow these instructions.
+
+1. Prepare the NCBI formatted GFF files mentioned above (at the Intro paragraph).
+
+2. Call the following code.
+
+`perl GFFparser.pl --.gff`
+
+3. After finished the command above, you will get `--.gff.parsed` file produced.
+
+4. If you want to inflate the parsed data into the database, call `perl dbtest.pl` and the parsed `--.gff.parsed` data file.
+
 ## Instructions
 
 The website is deployed in the either one of the following link.
@@ -34,7 +61,7 @@ You may also deploy on your own server with the HTML files. Please follow these 
 
 [http://stackoverflow.com/questions/15157648/cannot-run-a-simple-php-file-on-the-server](http://stackoverflow.com/questions/15157648/cannot-run-a-simple-php-file-on-the-server)
 
-4. 
+You may also contact [CECHelp](mailto:cechelp@miamioh.edu) to discuss the difficulties.
 
 ## Questions
 
