@@ -14,6 +14,9 @@ The main purpose of this website is to provide a gene comparison between cats (f
 
 We have used GFF files of cat and tiger, following NCBI format. You may download those files for reference.
 
+* Felis catus: `GCF_000181335.2_Felis_catus_8.0_genomic.gff`
+* Panthera tigris: `GCF_000464555.1_PanTig1.0_genomic.gff`
+
 ## Instructions
 
 The website is deployed in the either one of the following link.
@@ -30,6 +33,8 @@ You may also deploy on your own server with the HTML files. Please follow these 
 3. If your server doesn't have PHP installed, this package will not work accurately. We strongly encourage you, in this case applies to you, to refer to the following link to see the instructions.
 
 [http://stackoverflow.com/questions/15157648/cannot-run-a-simple-php-file-on-the-server](http://stackoverflow.com/questions/15157648/cannot-run-a-simple-php-file-on-the-server)
+
+4. 
 
 ## Questions
 
