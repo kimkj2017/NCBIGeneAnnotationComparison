@@ -24,6 +24,8 @@ while(<GENFILE>) {
       if (index("ID Name gene_biotype Parent", $key) != -1) {
         #print "($key=>$value)";
         $keyval{$key} = $value;
+      } elsif (index("Dbxref", $key) != -1) {
+        $keyval{'gene_id'} = substr($value, 7);
       }
     }
     my $jsonObj = jsonEncode->new();
