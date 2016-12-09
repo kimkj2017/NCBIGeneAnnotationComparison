@@ -34,58 +34,47 @@ my $html1 = <<"HTMLPAGE1";
       </div>
       <div class="modal-body">
         <p><strong>Here, an overview of gene and transcript data stored in our local database is shown.</strong></p>
-        <h4>Cat Overview</h4>
-        <table class="table table-striped">
-          <tr>
-            <th>GFF_NCBI</th>
-            <th>Number</th>
-          </tr>
 HTMLPAGE1
+
+print $html1;
 
 my ($user, $password, $host, $driver) = ('kimk3', 'bio466', 'localhost', 'mysql');
 
 my $dsn = "DBI:$driver:database=kimk3;host=$host";
 my $dbh = DBI->connect($dsn, $user, $password);
 
-my $sql1 = "SELECT * FROM `Gene_Type_Count_Cat`";
-my $sql2 = "SELECT * FROM `Gene_Type_Count_Tiger`";
-my $sql3 = "SELECT * FROM `Transcript_Type_Count_Cat`";
-my $sql4 = "SELECT * FROM `Transcript_Type_Count_Tiger`";
-my $cat_rowrf1 = $dbh->selectall_arrayref($sql1) or die $dbh->errstr;
-my $cat_rowrf2 = $dbh->selectall_arrayref($sql2) or die $dbh->errstr;
-#my $tig_rowrf1 = $dbh->selectall_arrayref($seq3) or die $dbh->errstr;
-#my $tig_rowrf2 = $dby->selectall_arrayref($seq4) or die $dbh->errstr;
-my @cat_row1 = @{$cat_rowrf1};
-my @cat_row2 = @{$cat_rowrf2};
-#my @tig_row1 = @{$tig_rowrf1};
-#my @tig_row2 = @{$tig_rowrf2};
-#my $idx = 0;
-=begin
-while (1) {
-  if ($idx > $#cat_row1 and $idx > $#cat_row2) { # and $idx > $#tig_row1 and $idx > $#tig_row2) {
-    last;
-  }
-  print '<tr><td>';
-  if ($idx <= $#cat_row1) {
-    print $cat_row1[$idx];
-  }
-  print '</td><td>';
-  if ($idx <= $#cat_row2) {
-    print $cat_row1
+my $cat_query = "SELECT `GENE_BIOTYPE`, COUNT(*) FROM (SELECT `GENE_BIOTYPE` FROM `Gene_Cat` UNION ALL SELECT `TYPE` FROM `Transcript_Cat`) `CAT` WHERE `GENE_BIOTYPE` != '' GROUP BY `GENE_BIOTYPE`";
+my $tig_query = "SELECT `GENE_BIOTYPE`, COUNT(*) FROM (SELECT `GENE_BIOTYPE` FROM `Gene_Tiger` UNION ALL SELECT `TYPE` FROM `Transcript_Tiger`) `Tiger` WHERE `GENE_BIOTYPE` != '' GROUP BY `GENE_BIOTYPE`";
+my $catref = $dbh->selectall_arrayref($cat_query) or die($dbh->errstr);
+my $tigref = $dbh->selectall_arrayref($tig_query) or die($dbh->errstr);
+
+print '<h4>Cat (<i>Felis catus</i>) Overview</h4>';
+print '<table class="table table-striped">';
+print '<tr><th>GFF_NCBI</th><th>Number</th></tr>';
+my @cat = @{$catref};
+foreach my $catrow (@cat) {
+  print '<tr>';
+  my @catlist = @{$catrow};
+  foreach my $val (@catlist) {
+    print "<td>$val</td>";
   }
   print '</tr>';
-  
-  $idx++;
 }
-=cut
-for (my $i = 0; $i <= $#cat_row1; $i+=2) {
-  $html1.='<tr>';
-  my @cat_indiv_row = @{$cat_row1[$i]};
-  foreach my $val (@cat_indiv_row) {
-    $html1.='<td>'.$val.'</td>';
+    
+print '</table>';
+print '<h4>Tiger (<i>Panthera tigris</i>) Overview</h4>';
+print '<table class="table table-striped">';
+print '<tr><th>GFF_NCBI</th><th>Number</th></tr>';
+my @tig = @{$tigref};
+foreach my $tigrow (@tig) {
+  print '<tr>';
+  my @tiglist = @{$tigrow};
+  foreach my $val (@tiglist) {
+    print "<td>$val</td>";
   }
-  $html1.='</tr>';
+  print '</tr>';
 }
+
 
 my $html2 = <<"HTMLPAGE2";
         </table>
@@ -99,4 +88,4 @@ my $html2 = <<"HTMLPAGE2";
 HTMLPAGE2
 
 
-print "$html1.$html2\n".$cgi->end_html();
+print "$html2\n".$cgi->end_html();
