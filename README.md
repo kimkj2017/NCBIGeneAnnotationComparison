@@ -36,13 +36,12 @@ You must have Perl iterpreter installed in your machine. Follow these instructio
 
 1. Prepare the NCBI formatted GFF files mentioned above (at the Intro paragraph).
 
-2. Call the following code.
+2. You can use `GFFparser.pm` in your own Perl code to run the parser. Here are the functions you may look at.
 
-`perl GFFparser.pl --.gff`
-
-3. After finished the command above, you will get `--.gff.parsed` file produced.
-
-4. If you want to inflate the parsed data into the database, call `perl dbtest.pl` and the parsed `--.gff.parsed` data file.
+* `GFFparser->new`: Constructor. Requires `-file_name`, `-file_src`, and `-file_type`. This version only accepts NCBI src and GFF types.
+* `toString()`: Prints the stringified data for test purpose; if the data is parsed correctly.
+* `writeFile()`: Write a `--.gff.parsed` file. It follows JSON notation.
+* `sendToDatabase($username, $password, $host, $species)`: WARNING, THIS METHOD IS DANGEROUS. MAY CHANGE YOUR DB DATA. It sends the parsed data into the database.
 
 ## Instructions
 
